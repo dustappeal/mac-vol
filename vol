@@ -1,0 +1,54 @@
+#! /usr/bin/ruby
+require 'optparse'
+
+# get current volume
+def get_settings
+  `osascript -e 'get volume settings'`
+end
+
+def get
+  current_vol_setting = /output volume:([0-9]+)/.match(get_settings)[1]
+  current_vol = find_closest(current_vol_setting.to_i)
+end
+
+def find_closest(volume_value)
+  volume_map = {0 => 0, 14 => 1, 29 => 2, 43 => 3, 57 => 4, 71 => 5, 86 => 6, 100 => 7}
+  closest_key = 0
+  closest_diff = 100
+  volume_map.each do |v, k|
+    diff = (v-volume_value).abs
+    if diff < closest_diff
+			closest_key = k
+			closest_diff = diff
+    end
+  end
+  closest_key
+end
+
+def set(level)
+  `osascript -e 'set volume #{level}'`
+end
+
+def up
+  old = get
+  new = old+1
+  set(new)
+  new
+end
+
+def down
+  old = get
+  new = old-1
+  set(new)
+  new
+end
+
+old_vol = get
+
+if ARGV[0].match(/^(\d)+$/)
+  set(ARGV[0].to_i)
+  puts "Volume changed from #{old_vol} to #{get}"
+else
+  puts "Volume is #{send(ARGV[0])}"
+end
+
