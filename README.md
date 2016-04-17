@@ -32,7 +32,7 @@ If you don't have a handy directory that is on your path you need to create one.
 
 ```
 mkdir /Users/dustappeal/bin
-echo 'export PATH="/users/dustappeal/bin:$PATH" > /Users/dustappeal/.bash_profile
+echo 'export PATH="/Users/dustappeal/bin:$PATH" > /Users/dustappeal/.bash_profile
 ```
 
 Then just download the vol script to that directory.
