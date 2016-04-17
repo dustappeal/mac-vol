@@ -11,7 +11,10 @@ writing a script that can be put into your path seemed like the simplest and mos
 elegant solution.
 
 ## How?
-The script is relatively easy to invoke. There are 7 "levels" of volume.
+The script is relatively easy to invoke. For whatever reason, the command that 
+this script is using has 7 "levels" of volume.
+
+To install, just put the script somewhere on your path.
 
 ```bash
 $ vol get
@@ -23,3 +26,20 @@ $ vol down
 $ vol 0
 > Volume changed from 3 to 0
 ```
+
+### Detailed installation instructions
+If you don't have a handy directory that is on your path you need to create one.
+
+```
+mkdir /Users/dustappeal/bin
+echo 'export PATH="/users/dustappeal/bin:$PATH" > /Users/dustappeal/.bash_profile
+```
+
+Then just download the vol script to that directory.
+```
+cd /Users/dustappeal/bin
+curl https://raw.githubusercontent.com/dustappeal/mac-vol/master/vol
+```
+
+## Tests
+Unit tests or automated tests are for babies but this has been tested on OS X 10.11 (El Capitan).
